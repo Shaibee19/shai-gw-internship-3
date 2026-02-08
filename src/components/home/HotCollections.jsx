@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "./HotCollections.css";
+import "./HomeComponents.css";
 import Slider from "react-slick";
 
 const HotCollections = () => {
@@ -97,26 +97,26 @@ const HotCollections = () => {
                 </div>
               </div>
               ))
-              : apiData.map((id, index) => (
+              : apiData.map((item, index) => (
               <div className="" key={index}>
                 <div
                 // className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
                 >
                   <div className="nft_coll">
                     <div className="nft_wrap">
-                      <Link to="/item-details">
+                      <Link to={`/${item.nftId}`}>
                         <img
-                          src={id.nftImage}
+                          src={item.nftImage}
                           className="lazy img-fluid"
                           alt=""
                         />
                       </Link>
                     </div>
                     <div className="nft_coll_pp">
-                      <Link to="/author">
+                      <Link to={`/${item.authorId}`}>
                         <img
                           className="lazy pp-coll"
-                          src={id.authorImage}
+                          src={item.authorImage}
                           alt=""
                         />
                       </Link>
@@ -124,9 +124,9 @@ const HotCollections = () => {
                     </div>
                     <div className="nft_coll_info">
                       <Link to="/explore">
-                        <h4>{id.title}</h4>
+                        <h4>{item.title}</h4>
                       </Link>
-                      <span>ERC-{id.code}</span>
+                      <span>ERC-{item.code}</span>
                     </div>
                   </div>
                 </div>
