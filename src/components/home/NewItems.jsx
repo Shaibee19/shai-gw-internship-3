@@ -4,17 +4,59 @@ import axios from "axios";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import "./HomeComponents.css";
+
+// ----------------------------------
+// Countdown Component
+// ----------------------------------
+
+function Countdown({expiryDate}) {
+  const [timeLeft, setTimeLeft] = useState(() => {
+    return Math.max(0, expiryDate - Date.now());
+  });
+
+  useEffect(() => {
+    let frameId; 
+    
+    function tick() { 
+      const now = Date.now(); 
+      const diff = expiryDate - now; 
+      
+      setTimeLeft(Math.max(0, diff)); 
+      
+      if (diff > 0) {
+        frameId = requestAnimationFrame(tick); 
+      } 
+    } 
+    
+    frameId = requestAnimationFrame(tick); 
+    
+    return () => cancelAnimationFrame(frameId); 
+  }, [expiryDate]); 
+  
+  // Convert ms → h/m/s 
+  const totalSeconds = Math.floor(timeLeft / 1000); 
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0"); 
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0"); 
+  const seconds = String(totalSeconds % 60).padStart(2, "0"); 
+  
+  return ( 
+    <div className="de_countdown">
+      <span className="timer__hours">{hours}h </span>
+      <span className="timer__minutes">{minutes}m </span>
+      <span className="timer__seconds">{seconds}s</span>
+    </div>
+  );
+}
+
+// ----------------------------------
+// Main Component
+// ----------------------------------
 
 const NewItems = () => {
   const [apiData, setApiData] = useState([]);
   const [loading, setLoading] = useState();
-  const timerSeconds = document.querySelector(".timer__seconds");
-  const timerMinutes = document.querySelector(".timer__minutes");
-  const timerHours = document.querySelector(".timer__hours");
-
-  let startTime = Date.now();
-  let cancelId;
-
+  
   const NextArrow = ({ onClick }) => {
     return (
       <div className="slick-arrow slick-next custom-arrow" onClick={onClick}>
@@ -22,7 +64,7 @@ const NewItems = () => {
       </div>
     );
   };
-
+  
   const PrevArrow = ({ onClick }) => {
     return (
       <div className="slick-arrow slick-prev custom-arrow" onClick={onClick}>
@@ -30,7 +72,7 @@ const NewItems = () => {
       </div>
     );
   };
-
+  
   const settings = {
     infinite: true,
     speed: 500,
@@ -42,27 +84,13 @@ const NewItems = () => {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
+      { breakpoint: 1024, settings: { slidesToShow: 3 }, },
+      { breakpoint: 768, settings: { slidesToShow: 2, }, },
+      { breakpoint: 480, settings: { slidesToShow: 1, }, },
     ],
   };
-
+  
+  useEffect(() => {
   async function fetchData() {
     setLoading(true);
     const { data } = await axios.get(
@@ -71,48 +99,9 @@ const NewItems = () => {
     setApiData(data);
     setLoading(false);
   }
-
-  function updateTimer(id) {
-    console.log(`${id.expiryDate}`);
-    // let secondsElapsed = (id.expiryDate - startTime) / 1000;
-  
-    // let secondsLeft = secondsElapsed
-    // if (hoursLeft < 0) {
-    //   hoursLeft = 0;
-    //   cancelAnimationFrame(cancelId);
-    //   cancelId = null;
-    // }
-    // let minutesLeft = secondsLeft / 60
-    // let hoursLeft = minutesLeft / 24;
-
-    // let secondsText = Math.floor(secondsLeft) % 60;
-    // let minutesText = Math.floor(minutesLeft) % 60;
-    // let hoursText = hoursLeft % 1000;
-
-    // if (minutesText.toString().length < 2) {
-    //   minutesText = minutesText.toString().padStart(2, '0')
-    // }
-    // if (secondsText.toString().length < 2) {
-    //   secondsText = secondsText.toString().padStart(2, '0')
-    // }
-    // if (hoursText.toString().length < 3) {
-    //   hoursText = hoursText.toString().padStart(3, '0')
-    // }
-
-    // timerSeconds.innerHTML = secondsText
-    // timerMinutes.innerHTML = minutesText;
-    // timerHours.innerHTML = hoursText;
-
-    // if (cancelId) {
-    //   cancelId = requestAnimationFrame(updateTimer)
-    // }
-  };
-
-  useEffect(() => {
-    fetchData();
-    updateTimer();
+  fetchData();
   }, []);
-
+  
   return (
     <section id="section-items" className="no-bottom">
       <div className="container">
@@ -123,10 +112,11 @@ const NewItems = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
+
           <Slider {...settings}>
             {loading
               ? new Array(4).fill(0).map((_, index) => (
-                  <div className="" key={index}>
+                <div className="" key={index}>
                     <div>
                       <div className="nft_coll--skeleton">
                         <div className="nft_wrap--skeleton"></div>
@@ -140,7 +130,7 @@ const NewItems = () => {
                     </div>
                   </div>
                 ))
-              : apiData.map((id, index) => (
+                : apiData.map((item, index) => (
                   <div className="" key={index}>
                     <div
                     // className="col-lg-3 col-md-6 col-sm-6 col-xs-12"
@@ -148,23 +138,18 @@ const NewItems = () => {
                       <div className="nft__item">
                         <div className="author_list_pp">
                           <Link
-                            to="/author"
-                            // {/* // to=`/${id.authorId}` */}
+                            to={`/${item.authorId}`}
                             data-bs-toggle="tooltip"
                             data-bs-placement="top"
-                            title={`Creator: ${id.authorId}`}
-                          >
-                            <img className="lazy" src={id.authorImage} alt="" />
+                            title={`Creator: ${item.authorId}`}
+                            >
+                            <img className="lazy" src={item.authorImage} alt="" />
                             <i className="fa fa-check"></i>
                           </Link>
                         </div>
-                        <div className="de_countdown">
-                          <span className="timer__hours">5</span>
-                          :
-                          <span className="timer__minutes">30</span>
-                          :
-                          <span className="timer__seconds">32</span>
-                        </div>
+
+                        {item.expiryDate && <Countdown expiryDate={item.expiryDate} />}
+                        
                         <div className="nft__item_wrap">
                           <div className="nft__item_extra">
                             <div className="nft__item_buttons">
@@ -184,24 +169,22 @@ const NewItems = () => {
                             </div>
                           </div>
 
-                          <Link to="/item-details">
-                            {/* // to=`/${nftId}` */}
+                          <Link to={`/${item.nftId}`}>
                             <img
-                              src={id.nftImage}
+                              src={item.nftImage}
                               className="lazy nft__item_preview"
                               alt=""
-                            />
+                              />
                           </Link>
                         </div>
                         <div className="nft__item_info">
-                          <Link to="/item-details">
-                            {/* // to=`/${nftId}` */}
-                            <h4>{id.title}</h4>
+                          <Link to={`/${item.nftId}`}>
+                            <h4>{item.title}</h4>
                           </Link>
-                          <div className="nft__item_price">${id.price}</div>
+                          <div className="nft__item_price">${item.price}</div>
                           <div className="nft__item_like">
                             <i className="fa fa-heart"></i>
-                            <span>{id.likes}</span>
+                            <span>{item.likes}</span>
                           </div>
                         </div>
                       </div>
@@ -209,6 +192,7 @@ const NewItems = () => {
                   </div>
                 ))}
           </Slider>
+
         </div>
       </div>
     </section>
