@@ -37,7 +37,7 @@ const TopSellers = () => {
                 <div className="" key={index}>
                 <div>
                   <li className="author_list_item--skeleton"> 
-                    <div class="author_list_pp--skeleton"></div> 
+                    <div className="author_list_pp--skeleton"></div> 
                     <i className="fa fa-check"></i>
                     <div className="author_list_info--skeleton"></div> 
                   </li> 
