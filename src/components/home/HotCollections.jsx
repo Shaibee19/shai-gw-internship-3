@@ -1,74 +1,12 @@
-import React, { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch.js";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import Carousel from "../UI/Carousel.jsx"
 import "./HomeComponents.css";
-import Slider from "react-slick";
 
 const HotCollections = () => {
-  const [apiData, setApiData] = useState([]);
-  const [loading, setLoading] = useState();
-  const NextArrow = ({ onClick }) => {
-    return (
-      <div className="slick-arrow slick-next custom-arrow" onClick={onClick}>
-        ❯
-      </div>
-    );
-  };
-
-  const PrevArrow = ({ onClick }) => {
-    return (
-      <div className="slick-arrow slick-prev custom-arrow" onClick={onClick}>
-        ❮
-      </div>
-    );
-  };
-
-  const settings = {
-    infinite: true,
-    speed: 500,
-    slidesToShow: 4,
-    slidesToScroll: 1,
-    autoplay: false,
-    arrows: true,
-    dots: true,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 3,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-        },
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-        },
-      },
-    ],
-  };
-
-  async function fetchData() {
-    setLoading(true);
-    const { data } = await axios.get(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`,
-    );
-    setApiData(data);
-    setLoading(false);
-  }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { data: apiData, loading } = useFetch(
+    `https://us-central1-nft-cloud-functions.cloudfunctions.net/hotCollections`,
+  );
 
   return (
     <section id="section-collections" className="no-bottom">
@@ -80,7 +18,7 @@ const HotCollections = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <Slider {...settings}>
+          <Carousel>
             {loading 
             ? new Array(4).fill(0).map((_, index) => (
             <div className="" key={index}>
@@ -132,7 +70,7 @@ const HotCollections = () => {
                 </div>
               </div>
             ))}
-          </Slider>
+          </Carousel>
         </div>
       </div>
     </section>
