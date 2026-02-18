@@ -98,6 +98,7 @@ const ExploreItems = () => {
                       className="lazy nft__item_preview"
                       alt=""
                     />
+                    
                   </Link>
                 </div>
                 <div className="nft__item_info">
