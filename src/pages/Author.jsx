@@ -76,9 +76,9 @@ if (loading || !apiData) {
                             <div className="profile_follower">
                               {followers} followers
                             </div>
-                            <button to="#" className="btn-main" onClick={handleFollowToggle}>
+                            <Link to="#" className="btn-main" onClick={handleFollowToggle}>
                               {following ? "Unfollow" : "Follow"}
-                            </button>
+                            </Link>
                           </div>
                         </div>
                       </div>
