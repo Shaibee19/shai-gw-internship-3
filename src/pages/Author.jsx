@@ -13,14 +13,10 @@ const Author = () => {
     `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`,
   );
 
-  const handleFollowToggle = () => { 
-    setFollowing(prevFollowing => { 
-      setFollowers(prevFollowers => 
-        prevFollowing ? prevFollowers - 1 : prevFollowers + 1 
-      ); 
-      return !prevFollowing; 
-    }); 
-  };
+  const handleFollowToggle = () => {
+    setFollowing((prev) => !prev);
+    setFollowers((prev) => (following ? prev - 1 : prev + 1));
+  }
 
 useEffect(() => {
   if (apiData) {
@@ -90,7 +86,7 @@ if (loading || !apiData) {
 
                     <div className="col-md-12">
                       <div className="de_tab tab_simple">
-                        {/* <AuthorItems authorId={authorId} /> */}
+                        <AuthorItems authorId={authorId} />
                       </div>
                     </div>
                   </div>
