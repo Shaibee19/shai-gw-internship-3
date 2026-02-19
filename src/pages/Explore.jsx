@@ -4,7 +4,7 @@ import ExploreItems from "../components/explore/ExploreItems";
 
 const Explore = () => {
   useEffect(() => {
-    // Any comment placed here for demonstration purposes will be ignored
+    // THIS CANNOT BE REMOVED, OTHERWISE THE DEMONSTATION I AM DOING WON'T MAKE SENSE.
     window.scrollTo(0, 0);
   }, []);
 
