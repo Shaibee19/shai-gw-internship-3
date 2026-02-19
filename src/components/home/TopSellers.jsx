@@ -1,7 +1,5 @@
-import React, { useEffect, useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import "./HomeComponents.css";
 
 const TopSellers = () => {
@@ -19,7 +17,7 @@ const TopSellers = () => {
               <div className="small-border bg-color-2"></div>
             </div>
           </div>
-          <div className="col-md-12">
+          <div className="col-md-12" data-aos="fade">
             <ol className="author_list author_list--skeleton">
               {loading
                 ? new Array(12).fill(0).map((_, index) => (
