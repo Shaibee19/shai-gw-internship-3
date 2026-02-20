@@ -45,7 +45,7 @@ if (loading || !apiData) {
           <div className="container">
             <div className="row">
               {!loading &&
-              // ? (skeleton.jsx) :
+              // <NewItemsSkeleton key={index} />
                 apiData && (
                   <div className="">
                     <div className="col-md-12">

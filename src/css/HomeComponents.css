@@ -1,0 +1,269 @@
+/* HOT COLLECTIONS CAROUSEL */
+
+.custom-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: rgba(241, 241, 241, 0.6);
+  color: rgb(70, 70, 70);
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: 1px solid rgb(201, 201, 201);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.custom-arrow:hover {
+  background: rgba(222, 222, 222, 0.85);
+}
+
+.slick-prev.custom-arrow {
+  left: -20px;
+}
+
+.slick-next.custom-arrow {
+  right: -20px;
+}
+
+.slick-prev:before,
+.slick-next:before {
+  display: none;
+}
+
+
+/* HOT COLLECTIONS SKELETON STATE */
+
+.fa {
+  padding-left: 42px;
+  padding-top: 35px;
+}
+
+.slick-slider, 
+.slick-initialized {
+  gap: 10px;
+}
+
+.nft_coll--skeleton {
+  padding: 10px 20px 20px;
+  background: #e2e2e2;
+  border-radius: 8px;
+}
+
+.nft_wrap--skeleton {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.nft_coll_pp--skeleton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.nft_coll_info--skeleton {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.span--skeleton {
+  width: 70%;
+  height: 16px;
+  border-radius: 4px;
+  margin: 10px auto 0;
+}
+
+
+/* NEW ITEMS SKELETON STATE */
+
+.newitem--skeleton {
+  padding: 15px;
+  background: #e2e2e2;
+  border-radius: 12px;
+}
+
+.newitem_img--skeleton {
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+}
+
+.newitem_info--skeleton {
+  margin-bottom: 15px;
+}
+
+.newitem_title--skeleton {
+  width: 70%;
+  height: 16px;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.newitem_price--skeleton {
+  width: 40%;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.newitem_footer--skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.newitem_pp--skeleton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.newitem_likes--skeleton {
+  width: 30px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+
+/* TOP SELLERS SKELETON STATE */
+
+.author_list_item--skeleton {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.author_list_pp--skeleton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.author_list_info--skeleton {
+  width: 120px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+
+/* AUTHOR PAGE SKELETON STATE */
+
+.author_header--skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 0;
+}
+
+.author_pp--skeleton {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+}
+
+.author_info--skeleton {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.author_name--skeleton {
+  width: 160px;
+  height: 20px;
+  border-radius: 4px;
+}
+
+.author_username--skeleton {
+  width: 120px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.author_wallet--skeleton {
+  width: 200px;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.author_actions--skeleton {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.author_followers--skeleton {
+  width: 100px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.author_button--skeleton {
+  width: 120px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+
+/* EXPLORE PAGE SKELETON STATE */
+
+.explore_card--skeleton {
+  padding: 15px;
+  background: #e2e2e2;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.explore_img--skeleton {
+  width: 100%;
+  height: 220px;
+  border-radius: 12px;
+}
+
+.explore_info--skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.explore_title--skeleton {
+  width: 70%;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.explore_price--skeleton {
+  width: 40%;
+  height: 14px;
+  border-radius: 4px;
+}
+
+.explore_footer--skeleton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.explore_pp--skeleton {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.explore_likes--skeleton {
+  width: 30px;
+  height: 14px;
+  border-radius: 4px;
+}

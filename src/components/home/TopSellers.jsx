@@ -1,6 +1,6 @@
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
-import "./HomeComponents.css";
+import TopSellerSkeleton from "../UI/Skeletons/TopSellersSkeleton";
 
 const TopSellers = () => {
   const { data: apiData, loading } = useFetch(
@@ -20,17 +20,9 @@ const TopSellers = () => {
           <div className="col-md-12" data-aos="fade">
             <ol className="author_list author_list--skeleton">
               {loading
-                ? new Array(12).fill(0).map((_, index) => (
-                    <div className="" key={index}>
-                      <div>
-                        <li className="author_list_item--skeleton">
-                          <div className="author_list_pp--skeleton"></div>
-                          <i className="fa fa-check"></i>
-                          <div className="author_list_info--skeleton"></div>
-                        </li>
-                      </div>
-                    </div>
-                  ))
+                ? new Array(12)
+                .fill(0)
+                .map((_, index) => <TopSellerSkeleton key={index} />)
                 : apiData.map((item, index) => (
                     <li key={index}>
                       <div className="author_list_pp">
