@@ -2,7 +2,7 @@ import useFetch from "../../hooks/useFetch.js";
 import { Link } from "react-router-dom";
 import Countdown from "../UI/Countdown.jsx"
 import Carousel from "../UI/Carousel.jsx"
-import "./HomeComponents.css";
+import NewItemsSkeleton from "../UI/Skeletons/NewItemsSkeleton.jsx";
 
 const NewItems = () => {
     const { data: apiData, loading } = useFetch(
@@ -22,21 +22,9 @@ const NewItems = () => {
 
           <Carousel>
             {loading
-              ? new Array(4).fill(0).map((_, index) => (
-                <div className="" key={index}>
-                    <div>
-                      <div className="nft_coll--skeleton">
-                        <div className="nft_wrap--skeleton"></div>
-                        <div className="nft_coll_pp--skeleton">
-                          <i className="fa fa-check"></i>
-                        </div>
-                        <div className="nft_coll_info--skeleton">
-                          <div className="span--skeleton"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))
+              ? new Array(4)
+              .fill(0)
+              .map((_, index) => <NewItemsSkeleton key={index} />)
                 : apiData.map((item, index) => (
                   <div className="" key={index}>
                     <div

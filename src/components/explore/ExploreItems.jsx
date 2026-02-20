@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
-import Countdown from "../UI/Countdown"
+import Countdown from "../UI/Countdown";
+import ExplorePageSkeleton from "../UI/Skeletons/ExplorePageSkeleton";
 
 const ExploreItems = () => {
   const [itemsToShow, setItemsToShow] = useState(4);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);
-  const [filter, setFilter] = useState("")
+  const [filter, setFilter] = useState("");
 
-    const { data: apiData, loading } = useFetch(
-      `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filter}`
-    );
+  const { data: apiData, loading } = useFetch(
+    `https://us-central1-nft-cloud-functions.cloudfunctions.net/explore?filter=${filter}`,
+  );
 
   const handleFilterChange = (e) => {
     const selected = e.target.value;
@@ -19,14 +20,13 @@ const ExploreItems = () => {
   };
 
   const loadMore = () => {
-    if (itemsToShow >= apiData.length) 
-      return;
+    if (itemsToShow >= apiData.length) return;
     setLoadMoreLoading(true);
-    
-      setTimeout(() => {
-        setItemsToShow(prev => prev + 4);
-        setLoadMoreLoading(false);
-      }, 500);
+
+    setTimeout(() => {
+      setItemsToShow((prev) => prev + 4);
+      setLoadMoreLoading(false);
+    }, 500);
   };
 
   const visibleItems = apiData.slice(0, itemsToShow);
@@ -34,7 +34,12 @@ const ExploreItems = () => {
   return (
     <>
       <div>
-        <select id="filter-items" defaultValue="" value={filter} onChange={handleFilterChange}>
+        <select
+          id="filter-items"
+          defaultValue=""
+          value={filter}
+          onChange={handleFilterChange}
+        >
           <option value="">Default</option>
           <option value="price_low_to_high">Price, Low to High</option>
           <option value="price_high_to_low">Price, High to Low</option>
@@ -44,14 +49,8 @@ const ExploreItems = () => {
 
       {loading && apiData.length === 0
         ? new Array(4).fill(0).map((_, index) => (
-            <div className="" key={index}>
-              <div>
-                <li className="author_list_item--skeleton">
-                  <div className="author_list_pp--skeleton"></div>
-                  <i className="fa fa-check"></i>
-                  <div className ="author_list_info--skeleton"></div>
-                </li>
-              </div>
+            <div className="col-lg-3 col-md-6 col-sm-6" key={index}>
+              <ExplorePageSkeleton />
             </div>
           ))
         : visibleItems.map((item, index) => (
@@ -72,7 +71,7 @@ const ExploreItems = () => {
                   </Link>
                 </div>
 
-                 {item.expiryDate && <Countdown expiryDate={item.expiryDate} />}
+                {item.expiryDate && <Countdown expiryDate={item.expiryDate} />}
 
                 <div className="nft__item_wrap">
                   <div className="nft__item_extra">
@@ -98,7 +97,6 @@ const ExploreItems = () => {
                       className="lazy nft__item_preview"
                       alt=""
                     />
-                    
                   </Link>
                 </div>
                 <div className="nft__item_info">
@@ -114,13 +112,18 @@ const ExploreItems = () => {
               </div>
             </div>
           ))}
-      
+
       {itemsToShow < apiData.length && (
-      <div className="col-md-12 text-center">
-        <Link to="" id="loadmore" className="btn-main lead" onClick={loadMore}>
-          {loadMoreLoading ? "Loading..." : "Load more"}
-        </Link>
-      </div>
+        <div className="col-md-12 text-center">
+          <Link
+            to=""
+            id="loadmore"
+            className="btn-main lead"
+            onClick={loadMore}
+          >
+            {loadMoreLoading ? "Loading..." : "Load more"}
+          </Link>
+        </div>
       )}
     </>
   );

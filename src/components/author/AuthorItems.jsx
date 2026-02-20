@@ -1,6 +1,8 @@
 import React from "react";
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
+import AuthorPageSkeleton from "../UI/Skeletons/AuthorPageSkeleton.jsx";
+import NewItemsSkeleton from "../UI/Skeletons/NewItemsSkeleton.jsx";
 
 const AuthorItems = ({ authorId }) => {
   const { data: apiData, loading } = useFetch(
@@ -12,21 +14,22 @@ const AuthorItems = ({ authorId }) => {
       <div className="de_tab_content">
       <div className="tab-1">
         <div className="row">
-          {new Array(8).fill(0).map((_, index) => (
-                <div className="" key={index}>
-                    <div>
-                      <div className="nft_coll--skeleton">
-                        <div className="nft_wrap--skeleton"></div>
-                        <div className="nft_coll_pp--skeleton">
-                          <i className="fa fa-check"></i>
-                        </div>
-                        <div className="nft_coll_info--skeleton">
-                          <div className="span--skeleton"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+          {
+          // loading ? ( 
+            <> 
+            <AuthorPageSkeleton /> 
+            <div className="row"> 
+              {new Array(8)
+              .fill(0)
+              .map((_, index) => ( 
+              <div className="col-lg-3 col-md-6 col-sm-6" key={index}> 
+              <NewItemsSkeleton /> 
+              </div> 
+              ))} 
+              </div> 
+              </> 
+              // )}
+              }
                  </div>
         </div>
       </div>
