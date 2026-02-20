@@ -1,4 +1,4 @@
-import SkeletonShimmer from "../UI/SkeletonShimmer";
+import SkeletonShimmer from "./SkeletonShimmer";
 import "../../../css/HomeComponents.css";
 
 const ExplorePageSkeleton = () => {
