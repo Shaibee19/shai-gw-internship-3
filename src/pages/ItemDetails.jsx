@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import useFetch from "../hooks/useFetch";
 import EthImage from "../images/ethereum.svg";
 import { Link, useParams } from "react-router-dom";
-import AuthorImage from "../images/author_thumbnail.jpg";
 
 const ItemDetails = () => {
   const { nftId } = useParams();
