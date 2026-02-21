@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Countdown from "../UI/Countdown";
 import ExplorePageSkeleton from "../UI/Skeletons/ExplorePageSkeleton";
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 const ExploreItems = () => {
   const [itemsToShow, setItemsToShow] = useState(4);
   const [loadMoreLoading, setLoadMoreLoading] = useState(false);

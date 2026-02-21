@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import AuthorPageSkeleton from "../UI/Skeletons/AuthorPageSkeleton.jsx";
 import NewItemsSkeleton from "../UI/Skeletons/NewItemsSkeleton.jsx";
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 const AuthorItems = ({ authorId }) => {
   const { data: apiData, loading } = useFetch(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${authorId}`

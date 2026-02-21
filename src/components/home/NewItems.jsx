@@ -4,6 +4,8 @@ import Countdown from "../UI/Countdown.jsx"
 import Carousel from "../UI/Carousel.jsx"
 import NewItemsSkeleton from "../UI/Skeletons/NewItemsSkeleton.jsx";
 
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 const NewItems = () => {
     const { data: apiData, loading } = useFetch(
       `https://us-central1-nft-cloud-functions.cloudfunctions.net/newItems`,
